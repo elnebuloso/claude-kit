@@ -18,6 +18,7 @@ This repo collects the other kind: rules that are specific enough to change what
 | [`presets/base`](presets/base/) | Any project, any language | `CLAUDE.md` — working principles, design and git conventions |
 | [`presets/adrs`](presets/adrs/) | Projects that keep architecture decision records | `.claude/rules/adrs*.md` — read the decision record before working in an area, plus how to write one |
 | [`presets/backlog`](presets/backlog/) | Users of the Backlog.md CLI | `.claude/rules/backlog.md` — how task entries are written |
+| [`presets/handbook`](presets/handbook/) | Projects with product documentation in the repo | `.claude/rules/handbook.md` — how handbook pages are written |
 | [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming and language for specs and plans |
 
 Each preset mirrors your project root: copy its contents to the top of your project, keeping the
@@ -26,8 +27,8 @@ assumes nothing at all, every other preset names the tool it depends on.
 
 Read what you copied and delete what you disagree with. These are starting points, not a
 standard — a rule you don't actually want is worse than no rule, because the model will follow it.
-Anything in `<ANGLE_BRACKETS>` is yours to fill in or delete; `grep -r '<[A-Z_]*>'` finds what
-you missed.
+Anything in `<ANGLE_BRACKETS>` is yours to fill in — or delete the whole rule it sits in, if it
+does not apply to you. `grep -r '<[A-Z_]*>'` finds what you missed.
 
 ## How the rules are written
 
