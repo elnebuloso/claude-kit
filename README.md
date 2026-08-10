@@ -13,40 +13,31 @@ This repo collects the other kind: rules that are specific enough to change what
 
 ## What's in here
 
-| Preset | For whom | What it does |
+| Preset | For whom | What you get |
 | --- | --- | --- |
-| [`presets/base`](presets/base/) | Any project, any language | A `CLAUDE.md` covering working principles, design, and git conventions |
+| [`presets/base`](presets/base/) | Any project, any language | `CLAUDE.md` — working principles, design and git conventions |
+| [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming for specs and plans |
 
-That's the whole menu right now. More presets will sit next to `base` rather than replace it.
+Each preset mirrors your project root: copy its contents to the top of your project, keeping the
+paths shown above. Presets sit next to each other rather than build on one another — `base`
+assumes nothing at all, every other preset names the tool it depends on.
 
-Copy it into your project:
+Read what you copied and delete what you disagree with. These are starting points, not a
+standard — a rule you don't actually want is worse than no rule, because the model will follow it.
 
-```sh
-cp presets/base/CLAUDE.md your-project/
-```
+## How the rules are written
 
-Then read it once and delete what you disagree with. It is a starting point, not a standard —
-a rule you don't actually want is worse than no rule, because the model will follow it.
+Every preset here follows the same four criteria. They work on your own rules too:
 
-## Why this CLAUDE.md is worth copying
-
-**Every rule is checkable.** `No error handling for impossible cases` is something a model can
-apply while writing a function. `Write robust code` is not. The same distinction runs through
-the whole file: `Default to no comment` beats `comments are rare`, because the first one names a
-behaviour and the second one only describes a mood.
-
-**Most rules say what *not* to do.** Models overproduce — comments nobody needs, tests for
-getters, an interface with one implementation, error handling for cases that can't happen. The
-limits are the valuable half: `no test for a getter, a pass-through or a config constant` saves
-more work than any instruction to write tests ever will.
-
-**It assumes nothing about your setup.** No build commands, no release pipeline, no framework, no
-language. It reads the same whether you work in TypeScript, Rust, PHP, or Bash — so anything
-specific to *your* stack goes in your own file, where it belongs, and never silently contradicts
-this one.
-
-**Nothing is said twice.** Repetition costs context on every single request, and duplicated rules
-drift apart until they contradict each other. Each rule appears once, in the section it belongs to.
+- **Checkable, not aspirational.** `No error handling for impossible cases` can be applied while
+  writing a function. `Write robust code` cannot.
+- **Limits, not goals.** Models overproduce — comments nobody needs, tests for getters, an
+  interface with one implementation. `No test for a getter, a pass-through or a config constant`
+  saves more work than any instruction to write tests ever will.
+- **No assumptions about your setup.** `base` names no language, build tool or pipeline; every
+  other preset names the one thing it depends on, in its own file.
+- **Nothing said twice.** Repetition costs context on every single request, and duplicated rules
+  drift apart until they contradict each other.
 
 ## License
 
