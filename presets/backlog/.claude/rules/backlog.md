@@ -7,7 +7,7 @@ tool leaves open.
 - **Backlog entries are written in `<LANGUAGE>`** — titles, descriptions, acceptance criteria,
   plans, implementation notes and summaries alike. A task is a note to the person doing the work,
   not source, so an English-in-source rule does not reach it; commit messages referring to a task
-  stay English. Writing entries in English anyway? Delete this bullet and the next one.
+  stay English.
 - **Names stay as they are written in the repository.** Paths, commands, identifiers, tool and
   option names are quoted verbatim, never replaced by a description of them — the reader has to be
   able to search for the string.

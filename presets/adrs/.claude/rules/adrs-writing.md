@@ -35,5 +35,4 @@ On the genre itself — templates, tooling, background — see
 - **The most obvious objection goes first among the rejected alternatives.** That section is why
   the ADR exists — so nobody reopens a settled question — and the one that gets reopened is
   whichever looks cheapest from the outside.
-- **ADRs are written in `<LANGUAGE>`** — prose and table values alike. Keeping them in English?
-  Delete this bullet.
+- **ADRs are written in `<LANGUAGE>`** — prose and table values alike.
