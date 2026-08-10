@@ -2,8 +2,8 @@
 .idea
 .vscode
 
-# CLAUDE (nur im Wurzelverzeichnis - presets/*/.claude/ gehoert ins Repo)
+# CLAUDE, root only - presets/*/.claude/ belongs in the repo
 /.claude
 
-# Temporäre Artefakte
+# Temporary artifacts
 *.tmp
