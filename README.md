@@ -16,7 +16,7 @@ This repo collects the other kind: rules that are specific enough to change what
 | Preset | For whom | What you get |
 | --- | --- | --- |
 | [`presets/base`](presets/base/) | Any project, any language | `CLAUDE.md` — working principles, design and git conventions |
-| [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming for specs and plans |
+| [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming and language for specs and plans |
 
 Each preset mirrors your project root: copy its contents to the top of your project, keeping the
 paths shown above. Presets sit next to each other rather than build on one another — `base`
@@ -24,6 +24,8 @@ assumes nothing at all, every other preset names the tool it depends on.
 
 Read what you copied and delete what you disagree with. These are starting points, not a
 standard — a rule you don't actually want is worse than no rule, because the model will follow it.
+Anything in `<ANGLE_BRACKETS>` is yours to fill in or delete; `grep -r '<[A-Z_]*>'` finds what
+you missed.
 
 ## How the rules are written
 
