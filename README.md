@@ -17,6 +17,7 @@ This repo collects the other kind: rules that are specific enough to change what
 | --- | --- | --- |
 | [`presets/base`](presets/base/) | Any project, any language | `CLAUDE.md` — working principles, design and git conventions |
 | [`presets/adrs`](presets/adrs/) | Projects that keep architecture decision records | `.claude/rules/adrs*.md` — read the decision record before working in an area, plus how to write one |
+| [`presets/backlog`](presets/backlog/) | Users of the Backlog.md CLI | `.claude/rules/backlog.md` — how task entries are written |
 | [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming and language for specs and plans |
 
 Each preset mirrors your project root: copy its contents to the top of your project, keeping the
