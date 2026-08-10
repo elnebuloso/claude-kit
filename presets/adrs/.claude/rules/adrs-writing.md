@@ -8,9 +8,6 @@ paths:
 On the genre itself — templates, tooling, background — see
 [adr.github.io](https://adr.github.io/). The rules below are what this project is strict about.
 
-- **ADRs live in `docs/decisions/NNNN-<topic>.md`.** Numbers are assigned in order and never
-  reused or renumbered — a superseded ADR keeps its number and gains a `Superseded by` line, the
-  replacement takes the next free one.
 - **Every ADR opens with a metadata table**: Status (Proposed / Accepted / Superseded), Date,
   Deciders, and what it covers. Add an `Implementation` row only when a lasting document describes
   how the thing is built — never a task id, which dies with the task, and never a placeholder
