@@ -4,3 +4,6 @@
   (local system time, not UTC), else same-day files sort wrong. Examples:
   - `docs/superpowers/specs/2026-06-13-1430-<topic>-design.md`
   - `docs/superpowers/plans/2026-06-13-1430-<topic>.md`
+- **Specs and plans are written in `<LANGUAGE>`.** Design documents under `docs/superpowers/`
+  are exempt from any English-in-source rule, which governs code, comments, commits and logs.
+  Writing them in English anyway? Delete this bullet.
