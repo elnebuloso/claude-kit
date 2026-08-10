@@ -1,0 +1,9 @@
+# IDE
+.idea
+.vscode
+
+# CLAUDE (nur im Wurzelverzeichnis - presets/*/.claude/ gehoert ins Repo)
+/.claude
+
+# Temporäre Artefakte
+*.tmp
