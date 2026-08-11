@@ -1,8 +1,3 @@
----
-paths:
-  - "docs/handbook/**"
----
-
 # Writing handbook pages
 
 The handbook is what a reader of the product reads. It lives in `docs/handbook/` and is written to

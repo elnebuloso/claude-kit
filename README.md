@@ -17,7 +17,7 @@ This repo collects the other kind: rules that are specific enough to change what
 | Preset | For whom | What you get |
 | --- | --- | --- |
 | [`presets/base`](presets/base/) | Any project, any language | `.claude/rules/base.md` — working principles, design and git conventions; `/project-code-review` and the reviewer agent it dispatches — a senior-developer review of the code as it stands, not of a diff |
-| [`presets/adrs`](presets/adrs/) | Projects that keep architecture decision records | `.claude/rules/adrs*.md` — read the decision record before working in an area, plus how to write one |
+| [`presets/adrs`](presets/adrs/) | Projects that keep architecture decision records | `.claude/rules/adrs.md` — read the decision record before working in an area, plus how to write one |
 | [`presets/backlog`](presets/backlog/) | Users of the Backlog.md CLI | `.claude/rules/backlog.md` — how task entries are written |
 | [`presets/handbook`](presets/handbook/) | Projects with product documentation in the repo | `.claude/rules/handbook.md` — how handbook pages are written |
 | [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming and language for specs and plans |
@@ -52,13 +52,18 @@ Every preset here follows the same five criteria. They work on your own rules to
   presets name nothing beyond the one dependency they exist for.
 - **Nothing said twice.** Repetition costs context on every single request, and duplicated rules
   drift apart until they contradict each other.
-- **Scoped only where it still arrives in time.** A `paths:` rule loads when Claude reads a
-  matching file, so scoping fits rules about what belongs *inside* a file you are already editing —
-  `handbook` is scoped to `docs/handbook/**` for that reason. A rule about where a file lives or
-  what it is named has to be known before that file exists, when there is nothing yet to read, so
-  it stays always-on however narrow its subject. `adrs` splits along that line: a four-line pointer
-  always loaded, the writing rules scoped. `superpowers` is eight lines and stays whole — a split
-  there would cost more file than it saves context.
+- **Always on, because a scoped rule misses the file that does not exist yet.** A `paths:` rule
+  loads when Claude reads a matching file. Writing the first ADR under `docs/decisions/` reads
+  nothing, so the rule never fires — and the moment a rule about how a file is written matters most
+  is when the file is being created. Scoping therefore covers only the smaller half of the job,
+  editing what is already there, and the failure is silent: the model writes a plausible file in
+  the wrong language, without the required table, and nothing says a rule was skipped. No preset
+  here scopes. The cost of that is a page of rules in context for as long as the project has ADRs
+  or a handbook, which is the cheaper side of the trade. Where a rule set grows past that — a
+  template, a worked example, a migration guide — the mechanism built for it is a
+  [skill](https://code.claude.com/docs/en/skills): its description stays in context and the body
+  loads when Claude judges it relevant, which is a trigger the model can reach without a file to
+  read first.
 
 ## License
 
