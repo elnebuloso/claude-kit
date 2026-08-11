@@ -19,6 +19,9 @@
 - **Bugfixes need a regression test.** When you fix a bug, first write a unit test that
   reproduces it (fails before, passes after) so it can't silently come back. Not sensibly
   testable? Say why — no empty test as a placeholder.
+- **A test fails only when the code is broken.** Nothing in a test depends on the current time, a
+  random value, the order tests run in, or the machine's timezone, locale or network — pin those
+  values. A test that turns green on a rerun without a code change is a broken test.
 - **Evidence over estimate.** A claim about third-party behavior (framework, library, platform)
   or a measured quantity names its evidence — measured in this project — or is marked
   a guess. Don't assert what you haven't checked.
