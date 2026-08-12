@@ -38,9 +38,10 @@ you want:
 curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- base make
 ```
 
-Without a name it prints the presets it knows and stops. A file you already have is left untouched
-and reported as skipped; `--force` overwrites it, which is how you pull a newer version of a preset
-you have not edited yourself. An unknown name aborts before anything is written.
+Without a name it prints the presets it knows and stops; `--all` takes every one of them, which is
+more than most projects want. A file you already have is left untouched and reported as skipped;
+`--force` overwrites it, which is how you pull a newer version of a preset you have not edited
+yourself. An unknown name aborts before anything is written.
 
 Copying the files by hand works just as well — what you see under `presets/<name>/` is the layout
 it ends up in. Every preset brings files of its own under `.claude/rules/`, which Claude Code loads
