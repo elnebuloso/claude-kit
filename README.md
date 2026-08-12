@@ -41,11 +41,14 @@ curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.
 # install the presets you want — name as many as you like
 curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- base make
 
+# presets whose rules govern prose want the language that prose is written in
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --language German adrs handbook
+
 # install them again over the files you already have
-curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --force base make
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --force --language German adrs handbook
 
 # install every preset there is
-curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --all
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --all --language German
 ```
 
 Called without arguments it lists the presets and stops. A file you already have is left untouched
@@ -53,15 +56,21 @@ and reported as skipped — `--force` is how you pull a newer version of a prese
 yourself, and it overwrites one you *have* edited just as readily. An unknown name aborts before
 anything is written. `--all` is listed for completeness; it installs more than most projects want.
 
+`--language` fills in the `<LANGUAGE>` placeholder while copying, in whatever spelling you pass it.
+The presets carrying a rule about prose — `adrs`, `backlog`, `handbook`, `superpowers` — refuse to
+install without it, because that rule does nothing until the language is decided. `base` and `make`
+neither need it nor mind it.
+
 Copying the files by hand works just as well — what you see under `presets/<name>/` is the layout
-it ends up in. Every preset brings files of its own under `.claude/rules/`, which Claude Code loads
-at session start exactly like a `CLAUDE.md` — so adopting one adds to whatever you already have
-there, and your own `CLAUDE.md` stays yours.
+it ends up in, with `<LANGUAGE>` then yours to replace. Every preset brings files of its own under
+`.claude/rules/`, which Claude Code loads at session start exactly like a `CLAUDE.md` — so adopting
+one adds to whatever you already have there, and your own `CLAUDE.md` stays yours.
 
 Read what you copied and delete what you disagree with. These are starting points, not a
 standard — a rule you don't actually want is worse than no rule, because the model will follow it.
 Anything in `<UPPERCASE_BRACKETS>` is yours to fill in — or delete the whole rule it sits in, if it
-does not apply to you. `grep -r '<[A-Z_]*>'` finds what you missed. Lowercase brackets like
+does not apply to you. `<LANGUAGE>` is the only one there is, and the installer fills it in for you.
+`grep -r '<[A-Z_]*>'` finds what you missed. Lowercase brackets like
 `<topic>` or `<scope>` are the model's to fill in as it works; leave those generic.
 
 ## How the rules are written

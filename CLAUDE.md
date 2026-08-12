@@ -58,6 +58,11 @@ only one in use and appears in every rule file that governs prose. Lowercase bra
 `<topic>` or `<scope>` are the model's to fill in at runtime and stay generic. `grep -rn '<[A-Z_]*>'`
 finds unfilled ones.
 
+`install.sh` substitutes `<LANGUAGE>` while copying and refuses to install a preset containing it
+without `--language`. It finds the placeholder by grep, so adding `<LANGUAGE>` to another rule file
+needs no change there — a *second* kind of placeholder would, and is the reason to think twice
+before introducing one.
+
 Everything shipped here is written in English, including the rule prose itself. `<LANGUAGE>` is how
 an adopting project chooses its own.
 
