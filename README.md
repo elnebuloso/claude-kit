@@ -35,10 +35,13 @@ Each preset mirrors your project root, so the installer runs from the top of the
 the preset in and writes below `.claude/`:
 
 ```sh
+# pick presets and language in a dialogue
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh
+
 # what the installer can do
 curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --help
 
-# install the presets you want — name as many as you like
+# name the presets you want and the questions are skipped
 curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- base make
 
 # presets whose rules govern prose want the language that prose is written in
@@ -51,15 +54,20 @@ curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.
 curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --all --language German
 ```
 
-Called without arguments it lists the presets and stops. A file you already have is left untouched
-and reported as skipped — `--force` is how you pull a newer version of a preset you have not edited
-yourself, and it overwrites one you *have* edited just as readily. An unknown name aborts before
-anything is written. `--all` is listed for completeness; it installs more than most projects want.
+Called without arguments it asks — which presets, then which language they write their prose in —
+reading the answers from the terminal rather than from the pipe the script itself came down. Where
+there is no terminal, in CI or under cron, it lists the presets and stops instead.
+
+A file you already have is left untouched and reported as skipped — `--force` is how you pull a
+newer version of a preset you have not edited yourself, and it overwrites one you *have* edited
+just as readily. An unknown name aborts before anything is written. `--all` is listed for
+completeness; it installs more than most projects want.
 
 `--language` fills in the `<LANGUAGE>` placeholder while copying, in whatever spelling you pass it.
 The presets carrying a rule about prose — `adrs`, `backlog`, `handbook`, `superpowers` — refuse to
 install without it, because that rule does nothing until the language is decided. `base` and `make`
-neither need it nor mind it.
+neither need it nor mind it. Asked interactively, each preset can get a language of its own, for a
+handbook in one language and specs in another.
 
 Copying the files by hand works just as well — what you see under `presets/<name>/` is the layout
 it ends up in, with `<LANGUAGE>` then yours to replace. Every preset brings files of its own under
