@@ -1,13 +1,30 @@
 #!/bin/sh
-# claude-kit installer — copies the .claude files of one or more presets (or --all of them) into
-# the current directory. Existing files are kept unless --force is given.
-#
-#   curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- base make
+# claude-kit installer — see usage() below, or run it with --help.
 set -eu
 
 TARBALL="https://codeload.github.com/elnebuloso/claude-kit/tar.gz/refs/heads/main"
-USAGE="Usage: curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- [--force] <preset>...
-       ... | sh -s -- [--force] --all"
+SCRIPT="https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh"
+
+usage() {
+	cat <<EOF
+claude-kit — copies the .claude files of a preset into the current directory.
+
+Run this from the top of the project you want the preset in:
+
+  curl -fsSL $SCRIPT | sh -s -- ARGUMENTS
+
+where ARGUMENTS is one of:
+
+  base make      install the presets "base" and "make" (name as many as you like)
+  --all          install every preset there is
+  --force base   overwrite files you already have — without --force they are kept
+  --help         show this text
+  (leave empty)  list the presets available for installing
+
+Files are written under .claude/ exactly as they are laid out in the repository:
+https://github.com/elnebuloso/claude-kit
+EOF
+}
 
 force=""
 all=""
@@ -16,13 +33,16 @@ for arg in "$@"; do
 	case "$arg" in
 		--force) force=1 ;;
 		--all) all=1 ;;
-		-*) printf 'unknown option: %s\n%s\n' "$arg" "$USAGE" >&2; exit 2 ;;
+		--help|-h) usage; exit 0 ;;
+		-*) printf 'unknown option: %s\n\n' "$arg" >&2; usage >&2; exit 2 ;;
 		*) presets="$presets $arg" ;;
 	esac
 done
 
 if [ -n "$all" ] && [ -n "$presets" ]; then
-	printf -- '--all takes no preset names\n%s\n' "$USAGE" >&2
+	printf -- '--all installs everything, so it takes no preset names —\n' >&2
+	printf 'drop either --all or the names%s.\n\n' "$presets" >&2
+	usage >&2
 	exit 2
 fi
 
@@ -34,10 +54,10 @@ curl -fsSL "$TARBALL" | tar xz -C "$tmp" --strip-components=1
 if [ -n "$all" ]; then
 	presets=$(ls "$tmp/presets")
 elif [ -z "$presets" ]; then
-	printf 'claude-kit — available presets:\n'
+	printf 'claude-kit — presets available for installing:\n\n'
 	ls "$tmp/presets" | sed 's/^/  /'
-	printf '\n%s\n' "$USAGE"
-	printf 'See https://github.com/elnebuloso/claude-kit for what each preset contains.\n'
+	printf '\nInstall one or more of them:\n\n  curl -fsSL %s | sh -s -- base make\n\n' "$SCRIPT"
+	printf 'Run with --help for everything else.\n'
 	exit 0
 fi
 

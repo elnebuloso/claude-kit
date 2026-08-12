@@ -31,17 +31,27 @@ not a dependency.
 
 ## Install
 
-Each preset mirrors your project root. Run this from the top of your project, naming the presets
-you want:
+Each preset mirrors your project root, so the installer runs from the top of the project you want
+the preset in and writes below `.claude/`:
 
 ```sh
+# what the installer can do
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --help
+
+# install the presets you want — name as many as you like
 curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- base make
+
+# install them again over the files you already have
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --force base make
+
+# install every preset there is
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- --all
 ```
 
-Without a name it prints the presets it knows and stops; `--all` takes every one of them, which is
-more than most projects want. A file you already have is left untouched and reported as skipped;
-`--force` overwrites it, which is how you pull a newer version of a preset you have not edited
-yourself. An unknown name aborts before anything is written.
+Called without arguments it lists the presets and stops. A file you already have is left untouched
+and reported as skipped — `--force` is how you pull a newer version of a preset you have not edited
+yourself, and it overwrites one you *have* edited just as readily. An unknown name aborts before
+anything is written. `--all` is listed for completeness; it installs more than most projects want.
 
 Copying the files by hand works just as well — what you see under `presets/<name>/` is the layout
 it ends up in. Every preset brings files of its own under `.claude/rules/`, which Claude Code loads
