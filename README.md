@@ -23,16 +23,29 @@ This repo collects the other kind: rules that are specific enough to change what
 | [`presets/make`](presets/make/) | Projects driven by a `Makefile` | `.claude/rules/make.md` — run the target instead of the command behind it, and what a command has to earn before it becomes one |
 | [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming and language for specs and plans |
 
-Each preset mirrors your project root: copy its contents to the top of your project, keeping the
-paths shown above. Every preset brings files of its own under `.claude/rules/`, which Claude Code
-loads at session start exactly like a `CLAUDE.md` — so adopting one adds to whatever you already
-have there, and your own `CLAUDE.md` stays yours.
-
 Presets sit next to each other rather than build on one another. A preset
 depends on something when that thing has to be there already — `adrs` on a decision-record
 practice, `backlog` on the Backlog.md CLI — and it names that one thing in its own file. `base`
 needs nothing beforehand; a directory it creates on first use, like `docs/reviews/`, is an output,
 not a dependency.
+
+## Install
+
+Each preset mirrors your project root. Run this from the top of your project, naming the presets
+you want:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/elnebuloso/claude-kit/main/install.sh | sh -s -- base make
+```
+
+Without a name it prints the presets it knows and stops. A file you already have is left untouched
+and reported as skipped; `--force` overwrites it, which is how you pull a newer version of a preset
+you have not edited yourself. An unknown name aborts before anything is written.
+
+Copying the files by hand works just as well — what you see under `presets/<name>/` is the layout
+it ends up in. Every preset brings files of its own under `.claude/rules/`, which Claude Code loads
+at session start exactly like a `CLAUDE.md` — so adopting one adds to whatever you already have
+there, and your own `CLAUDE.md` stays yours.
 
 Read what you copied and delete what you disagree with. These are starting points, not a
 standard — a rule you don't actually want is worse than no rule, because the model will follow it.
