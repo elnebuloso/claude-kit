@@ -6,6 +6,9 @@ On the genre itself — templates, tooling, background — see
 - **ADRs live in `docs/decisions/NNNN-<topic>.md`.** Numbers are assigned in order and never
   reused or renumbered — a superseded ADR keeps its number and gains a `Superseded by` line, the
   replacement takes the next free one.
+- **ADRs record the user's decisions, not yours.** Write one only when asked, or once the user
+  has agreed in chat to the decision and the alternatives it rejects. Status stays `Proposed`
+  until the user accepts it.
 - **Read the ADR covering an area before you work in it.** It names the options already weighed
   and rejected.
 - **Every ADR opens with a metadata table**: Status (Proposed / Accepted / Superseded), Date,

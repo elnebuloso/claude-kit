@@ -17,7 +17,7 @@ This repo collects the other kind: rules that are specific enough to change what
 | Preset | For whom | What you get |
 | --- | --- | --- |
 | [`presets/base`](presets/base/) | Any project, any language | `.claude/rules/base.md` — working principles, design and git conventions; `/project-code-review` and the reviewer agent it dispatches — a senior-developer review of the code as it stands, not of a diff |
-| [`presets/adrs`](presets/adrs/) | Projects that keep architecture decision records | `.claude/rules/adrs.md` — read the decision record before working in an area, plus how to write one |
+| [`presets/adrs`](presets/adrs/) | Projects that keep architecture decision records | `.claude/rules/adrs.md` — read the decision record before working in an area, plus when and how to write one |
 | [`presets/backlog`](presets/backlog/) | Users of the Backlog.md CLI | `.claude/rules/backlog.md` — how task entries are written |
 | [`presets/handbook`](presets/handbook/) | Projects with product documentation in the repo | `.claude/rules/handbook.md` — how handbook pages are written |
 | [`presets/make`](presets/make/) | Projects driven by a `Makefile` | `.claude/rules/make.md` — run the target instead of the command behind it, and what a command has to earn before it becomes one |
