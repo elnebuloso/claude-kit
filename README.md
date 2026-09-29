@@ -21,7 +21,7 @@ This repo collects the other kind: rules that are specific enough to change what
 | [`presets/backlog`](presets/backlog/) | Users of the Backlog.md CLI | `.claude/rules/backlog.md` — how task entries are written |
 | [`presets/handbook`](presets/handbook/) | Projects with product documentation in the repo | `.claude/rules/handbook.md` — how handbook pages are written |
 | [`presets/make`](presets/make/) | Projects driven by a `Makefile` | `.claude/rules/make.md` — run the target instead of the command behind it, and what a command has to earn before it becomes one |
-| [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming and language for specs and plans |
+| [`presets/superpowers`](presets/superpowers/) | Users of the Superpowers plugin | `.claude/rules/superpowers.md` — file naming, language and standing of specs and plans |
 
 Presets sit next to each other rather than build on one another. A preset
 depends on something when that thing has to be there already — `adrs` on a decision-record
