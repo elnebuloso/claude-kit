@@ -39,10 +39,12 @@
 - **Abstractions are earned.** Introduce an abstraction or inject a dependency only where a
   second implementation, a test seam or a concrete plan already exists.
 - **Default to no comment.** Comment only a *why* the code can't show (constraint, workaround,
-  trade-off). Never narrate what the code does, no section banners. A comment is
-  self-contained — never a pointer to a ticket, issue or design doc; if the why only makes sense
-  with that open, state the why itself. Before keeping a comment, check whether a better name or
-  a test says it instead — usually one of them does.
+  trade-off). Never narrate what the code does, no section banners. A comment, doc comment, log
+  line or test description is self-contained — never a pointer to an ADR, ticket, issue or design
+  doc, which move or die while the code stays; state the why itself.
+  ❌ `// retry per ADR-007` ✅ `// max 3 retries: provider locks after the 4th`
+  Before keeping a comment, check whether a better name or a test says it instead — usually one of
+  them does.
 - **Doc comments go on public API only** (docstring, JSDoc, Javadoc, `///`) — and only for what
   the signature doesn't already say.
 - **New functionality follows the established pattern** instead of inventing a parallel one.
