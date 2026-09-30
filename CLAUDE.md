@@ -30,7 +30,8 @@ adopting one means copying its contents to the top of the target project, paths 
   agent it dispatches. The skill collects scope and timestamp; the agent owns how the review is
   done, written and returned, and writes exactly one file to `docs/reviews/`. Keep that split:
   restating the agent's contract in the skill is how the two drift apart.
-- `adrs`, `backlog`, `handbook`, `superpowers` — one rule file each.
+- `adrs` — `rules/adrs.md` plus the `adrs-consolidate` skill, which the user invokes by hand.
+- `backlog`, `handbook`, `make`, `superpowers` — one rule file each.
 
 Presets sit next to each other and never build on one another. A dependency means *must already be
 there* (`adrs` needs a lived ADR practice, `backlog` needs the Backlog.md CLI), and a preset names
