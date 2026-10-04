@@ -64,12 +64,12 @@ Once the user has approved the structure:
 
 1. Draft the new ADRs in `_consolidate/new/`, in the format from phase 1. Each holds at least
    context, decision, rejected alternatives (only the ones that matter), consequences, and an
-   **Origin** section listing the source ADRs by number and title. The metadata table carries the consolidation's
-   date and status `Accepted` only once the user has approved the ADR in phase 4 — one carried
-   over as a proposal stays `Proposed`; the source ADRs' dates stay with them in the Origin
-   section. A superseded earlier decision may appear
-   among the rejected alternatives in one sentence, where the reason it was superseded helps
-   explain the current one. Mark each draft as *clear*, *interpreted* or *contradictory*.
+   **Origin** section listing each source ADR by file name and date — the file name is what
+   `git log` finds it by once it is deleted. The metadata table carries the consolidation's date
+   and status `Accepted` only once the user has approved the ADR in phase 4 — one carried over as
+   a proposal stays `Proposed`. A superseded earlier decision may appear among the rejected
+   alternatives in one sentence, where the reason it was superseded helps explain the current one.
+   Mark each draft as *clear*, *interpreted* or *contradictory*.
 2. Check every decision against the actual codebase and write `_consolidate/03-code-check.md`,
    one verdict per new ADR:
    - ✅ consistent — with evidence: file and location
@@ -96,16 +96,17 @@ Once the user has answered:
 3. Remove all old ADRs with `git rm`, move the new ADRs into `docs/decisions/` and `git add` them,
    so the index holds the whole change and nothing else.
 4. Add to `CLAUDE.md`: the ADRs in `docs/decisions/` are the binding source for architecture
-   decisions; earlier ADRs remain in the git history but are not binding.
+   decisions; earlier ADRs remain in the git history but are not binding. Skip this if an earlier
+   consolidation already added it.
 5. List the deviations the user chose to resolve by adjusting the code as tasks in
    `_consolidate/05-followups.md` — do not implement them.
 6. Check that no file in the repository still points at a deleted ADR — a link to its file, or its
-   number cited in a code comment, a document or `CLAUDE.md` — and list what you find.
-
+   number cited in a code comment, a document or `CLAUDE.md` — and list what you find. The Origin
+   sections of the new ADRs point there on purpose and are left out.
 7. Ask the user to carry the follow-ups wherever their tasks live, then stop. Once they confirm,
    delete `_consolidate/` with everything in it and remove its line from `.git/info/exclude` —
-   git holds the history, and a leftover `_consolidate/` would make the next run resume a
-   finished one.
+   its results now live in the new ADRs and the follow-ups, and a leftover `_consolidate/` would
+   make the next run resume a finished one.
 
 Close by telling the user that committing and pushing are theirs to do.
 
