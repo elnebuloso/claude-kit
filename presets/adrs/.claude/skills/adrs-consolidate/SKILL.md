@@ -1,8 +1,7 @@
 ---
 name: adrs-consolidate
-description: Consolidates the ADRs in docs/decisions into a clean set that holds only the decisions in force today — superseded ones drop out, and the old ADRs are deleted once a git tag preserves them. Only on an explicit request to consolidate or distil the ADRs.
+description: Consolidates the ADRs in docs/decisions into a clean set that holds only the decisions in force today — superseded ones drop out, and the old ADRs are deleted; git history keeps them. Only on an explicit request to consolidate or distil the ADRs.
 disable-model-invocation: true
-allowed-tools: Bash(date *)
 ---
 
 # Consolidate the ADRs in docs/decisions
@@ -25,11 +24,6 @@ and questions — the user makes the decisions.
   exists, a run is in progress: read what is there, tell the user where it stands, and wait for
   their OK before going on. Answers the user gave in chat do not survive the session unless they
   are in a file, so record each one in `04-questions.md` as it comes.
-- The tag that preserves the old ADRs is named `adr-pre-consolidate-` followed by
-  !`date +%Y-%m-%d-%H%M` — already resolved when you read this. Write the full name to
-  `_consolidate/tag-name.txt` in phase 1 and use exactly that name from then on; on a resumed run
-  the file wins over the timestamp above. If the tag already exists when you set it in phase 4,
-  stop and ask.
 - After every phase: a short summary, then stop and wait for the user's OK.
 
 ## Phase 1: Inventory
@@ -59,7 +53,7 @@ Write `_consolidate/02-mapping.md` proposing how the old ADRs merge into new one
   of its own or dropped goes to the user as a question.
 - The new ADRs continue the existing number series. `adrs.md` forbids reusing a number, and code,
   commits and tickets citing an old number would otherwise point at a different decision than the
-  one preserved in the tag.
+  one in the git history.
 
 A new ADR bundles one coherent decision, not a whole topic area. Several focused ADRs beat one
 catch-all.
@@ -70,8 +64,7 @@ Once the user has approved the structure:
 
 1. Draft the new ADRs in `_consolidate/new/`, in the format from phase 1. Each holds at least
    context, decision, rejected alternatives (only the ones that matter), consequences, and an
-   **Origin** section listing the source ADRs and the name of the git tag they can be read in,
-   spelled out from `_consolidate/tag-name.txt`. The metadata table carries the consolidation's
+   **Origin** section listing the source ADRs by number and title. The metadata table carries the consolidation's
    date and status `Accepted` only once the user has approved the ADR in phase 4 — one carried
    over as a proposal stays `Proposed`; the source ADRs' dates stay with them in the Origin
    section. A superseded earlier decision may appear
@@ -97,15 +90,13 @@ Once the user has answered:
    the substance of a decision, record that briefly in the ADR's context. No draft marker survives
    — neither *clear / interpreted / contradictory* nor `[OPEN: …]`; a rationale the user could not
    supply either is stated as not recorded.
-2. Confirm that every old ADR is committed as it stands — the tag points at `HEAD`, and an
-   uncommitted edit or a never-committed file would be lost with the deletion. If one is not,
-   stop and ask. Otherwise set the tag named in `_consolidate/tag-name.txt`, before anything is
-   deleted.
+2. Confirm that every old ADR is committed as it stands — git history is the only record left,
+   and an uncommitted edit or a never-committed file would be lost with the deletion. If one is
+   not, stop and ask.
 3. Remove all old ADRs with `git rm`, move the new ADRs into `docs/decisions/` and `git add` them,
    so the index holds the whole change and nothing else.
 4. Add to `CLAUDE.md`: the ADRs in `docs/decisions/` are the binding source for architecture
-   decisions; earlier ADRs can be read in the tag `<name from tag-name.txt>` but are not binding.
-   If a reference to an earlier consolidation tag is already there, keep it and add the new one.
+   decisions; earlier ADRs remain in the git history but are not binding.
 5. List the deviations the user chose to resolve by adjusting the code as tasks in
    `_consolidate/05-followups.md` — do not implement them.
 6. Check that no file in the repository still points at a deleted ADR — a link to its file, or its
@@ -113,10 +104,9 @@ Once the user has answered:
 
 7. Ask the user to carry the follow-ups wherever their tasks live, then stop. Once they confirm,
    delete `_consolidate/` with everything in it and remove its line from `.git/info/exclude` —
-   the tag holds the history, and a leftover `_consolidate/` would make the next run resume a
+   git holds the history, and a leftover `_consolidate/` would make the next run resume a
    finished one.
 
-Close by telling the user that committing and pushing are theirs to do — the tag is local until
-pushed, and every Origin section points at it.
+Close by telling the user that committing and pushing are theirs to do.
 
 Begin with phase 1.
