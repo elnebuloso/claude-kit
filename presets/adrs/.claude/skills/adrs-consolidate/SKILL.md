@@ -1,6 +1,6 @@
 ---
 name: adrs-consolidate
-description: Consolidates the ADRs in docs/decisions into a clean set that holds only the decisions in force today — superseded ones drop out, and the old ADRs are deleted. Only on an explicit request to consolidate or distil the ADRs.
+description: Consolidates the ADRs in docs/decisions into a clean set that holds only the decisions in force today — superseded ones drop out, and the old ADRs are deleted.
 disable-model-invocation: true
 ---
 
@@ -17,7 +17,6 @@ makes the decisions.
 - Change or delete no existing ADR before phase 4.
 - Change no production code.
 - Invent no rationale. Where the ADRs do not say *why*, mark it `[OPEN: rationale missing]`.
-- Every new ADR names the old ADRs it was built from.
 - Mark uncertainty, contradictions and interpretation as such — do not smooth them over.
 - Working files go to `docs/decisions/_consolidate/`. It is scaffolding, deleted at the end. If it
   already exists, a run is in progress: read what is there, tell the user where it stands, and
@@ -62,11 +61,12 @@ Once the user has approved the structure:
 
 1. Draft the new ADRs in `_consolidate/new/`, in the format from phase 1. Each holds at least
    context, decision, rejected alternatives (only the ones that matter), consequences, and an
-   **Origin** section listing each source ADR by file name and date. The metadata table carries
-   the consolidation's date and status `Accepted` only once the user has approved the ADR in
-   phase 4 — one carried over as a proposal stays `Proposed`. A superseded earlier decision may
-   appear among the rejected alternatives in one sentence, where the reason it was superseded
-   helps explain the current one. Mark each draft as *clear*, *interpreted* or *contradictory*.
+   **Origin** section naming each source ADR by number, title and date, without a link — the files
+   are gone once phase 4 is done. The metadata table carries the consolidation's date and status
+   `Accepted` only once the user has approved it in phase 4 — one carried over as a proposal stays
+   `Proposed`. A superseded earlier decision may appear among the rejected alternatives in one
+   sentence, where the reason it was superseded helps explain the current one. Mark each draft as
+   *clear*, *interpreted* or *contradictory*.
 2. Check every decision against the actual codebase and write `_consolidate/03-code-check.md`,
    one verdict per new ADR:
    - ✅ consistent — with evidence: file and location
@@ -87,13 +87,15 @@ Once the user has answered:
    the substance of a decision, record that briefly in the ADR's context. No draft marker survives
    — neither *clear / interpreted / contradictory* nor `[OPEN: …]`; a rationale the user could not
    supply either is stated as not recorded.
-2. Delete all old ADRs and move the new ADRs into `docs/decisions/`.
-3. List the deviations the user chose to resolve by adjusting the code as tasks in
+2. Show the user the finished ADRs, then stop. Their OK approves them — set the status as phase 3
+   describes — and only then:
+3. Delete all old ADRs and move the new ADRs into `docs/decisions/`.
+4. List the deviations the user chose to resolve by adjusting the code as tasks in
    `_consolidate/05-followups.md` — do not implement them.
-4. Check that no file in the repository still points at a deleted ADR — a link to its file, or its
+5. Check that no file in the project still points at a deleted ADR — a link to its file, or its
    number cited in a code comment or a document — and list what you find. The Origin sections of
-   the new ADRs point there on purpose and are left out.
-5. Ask the user to carry the follow-ups wherever their tasks live, then stop. Once they confirm,
+   the new ADRs name them on purpose and are left out.
+6. Ask the user to carry the follow-ups wherever their tasks live, then stop. Once they confirm,
    delete `_consolidate/` with everything in it — its results now live in the new ADRs and the
    follow-ups, and a leftover `_consolidate/` would make the next run resume a finished one.
 
